@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartik Swami - Portfolio</title>
+  <!-- Performance Optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0dcaf0;
+      --secondary: #6c757d;
+      --dark: #121212;
+      --darker: #0a0a0a;
+      --light: #f8f9fa;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(13, 202, 240, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(13, 202, 240, 0.05) 0%, transparent 20%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    
+    /* Layout */
+    .container-custom {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    section {
+      padding: 6rem 0;
+    }
+    
+    /* Buttons */
+    .btn {
+      border-radius: 30px;
+      padding: 0.75rem 2rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: none;
+      z-index: 1;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: width 0.5s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      width: 100%;
+    }
+    
+    .btn-outline-primary {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline-primary:hover {
+      background: var(--primary);
+      color: var(--dark);
+    }
+    
+    .btn-outline-light {
+      border: 2px solid var(--light);
+      color: var(--light);
+    }
+    
+    .btn-outline-light:hover {
+      background: var(--light);
+      color: var(--dark);
+    }
+    
+    /* Navbar */
+    .navbar {
+      background-color: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(13, 202, 240, 0.1);
+      transition: var(--transition);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--primary) !important;
+    }
+    
+    .navbar-nav .nav-link {
+      color: var(--light) !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      outline: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--primary);
+      margin-bottom: 2rem;
+      box-shadow: 0 0 30px rgba(13, 202, 240, 0.3);
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--primary);
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+    
+    .social-icons a:hover {
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-5px);
+    }
+    
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .skill-badge {
+      background: rgba(13, 202, 240, 0.1);
+      color: var(--primary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    
+    .skill-badge:hover {
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+    
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(13, 202, 240, 0.2);
+    }
+    
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .project-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project-links {
+      margin-top: auto;
+      display: flex;
+      gap: 1rem;
+      padding-top: 1.5rem;
+    }
+    
+    /* Contact Section */
+    .contact-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .form-control {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+      color: var(--light);
+    }
+    
+    /* Footer */
+    footer {
+      background: rgba(10, 10, 10, 0.95);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(13, 202, 240, 0.1);
+    }
+    
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .footer-social a {
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+    
+    .footer-social a:hover {
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .fade-in.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      section {
+        padding: 4rem 0;
+      }
+      
+      h1 {
+        font-size: 2.3rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .profile-img {
+        width: 180px;
+        height: 180px;
+      }
+      
+      .hero {
+        min-height: auto;
+        padding: 8rem 0 4rem;
+      }
+      
+      .contact-form {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+      
+      .project-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-custom">
+      <a class="navbar-brand" href="#">Kartik Swami</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container-custom">
+      <div class="hero-content text-center fade-in">
+        <img src="https://raw.githubusercontent.com/nobitanobita/url-shortner-with-qr/main/profile.jpg" alt="Kartik Swami" class="profile-img float-animation">
+        <h1>Kartik Swami</h1>
+        <p class="lead text-primary mb-4">Software Developer</p>
+        <p class="fs-5 mb-4">I build smart and scalable solutions in <span class="text-primary">IoT</span>, <span class="text-primary">Networking</span>, <span class="text-primary">Android</span>, and more.</p>
+        
+        <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+          <a href="#projects" class="btn btn-outline-light px-4">View Projects</a>
+          <a href="#contact" class="btn btn-outline-primary px-4">Contact Me</a>
+        </div>
+
+        <div class="social-icons">
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-darker">
+    <div class="container-custom">
+      <h2 class="text-center fade-in">About Me</h2>
+      <div class="about-content fade-in">
+        <div>
+          <p>I am Kartik Swami, a passionate Software Developer specializing in IoT, Networking, Android Development, and scalable software solutions. My journey in technology has been driven by curiosity and a deep desire to innovate.</p>
+          <p>I love building robust applications that solve real-world problems. When I'm not coding, you can find me exploring the latest tech trends or watching anime.</p>
+          <div class="skills">
+            <span class="skill-badge">IoT</span>
+            <span class="skill-badge">Networking</span>
+            <span class="skill-badge">Android</span>
+            <span class="skill-badge">Java</span>
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">Node.js</span>
+            <span class="skill-badge">Firebase</span>
+            <span class="skill-badge">Cloud</span>
+            <span class="skill-badge">UI/UX</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="Coding Setup" class="img-fluid rounded-3" style="max-height: 400px; width: 100%; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container-custom">
+      <h2 class="text-center fade-in">My Projects</h2>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card fade-in">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="Smart Home System" class="project-img">
+          <div class="project-content">
+            <h3>Smart Home System</h3>
+            <p>IoT-based home automation solution with voice control and remote management capabilities.</p>
+            <p><strong>Technologies:</strong> IoT, Node.js, React Native, AWS</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary">View Project</a>
+              <a href="#" class="btn btn-outline-light">Source Code</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="project-card fade-in">
+          <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80" alt="Network Analyzer" class="project-img">
+          <div class="project-content">
+            <h3>Network Analyzer</h3>
+            <p>Advanced network monitoring tool that provides real-time analytics and security insights.</p>
+            <p><strong>Technologies:</strong> Python, Networking, Flask, MongoDB</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary">View Project</a>
+              <a href="#" class="btn btn-outline-light">Source Code</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card fade-in">
+          <img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="Health Tracker App" class="project-img">
+          <div class="project-content">
+            <h3>Health Tracker App</h3>
+            <p>Android application for tracking health metrics with AI-powered insights and recommendations.</p>
+            <p><strong>Technologies:</strong> Android, Kotlin, Firebase, TensorFlow Lite</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline-primary">View Project</a>
+              <a href="#" class="btn btn-outline-light">Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="bg-darker">
+    <div class="container-custom">
+      <h2 class="text-center fade-in">My Skills</h2>
+      <div class="row fade-in">
+        <div class="col-md-4 mb-4">
+          <div class="card bg-transparent border-primary h-100">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-microchip text-primary mb-3" style="font-size: 3rem;"></i>
+              <h3 class="card-title">IoT Development</h3>
+              <p class="card-text">Design and implementation of IoT solutions with sensors, microcontrollers, and cloud integration.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="card bg-transparent border-primary h-100">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-network-wired text-primary mb-3" style="font-size: 3rem;"></i>
+              <h3 class="card-title">Networking</h3>
+              <p class="card-text">Network design, security protocols, and infrastructure optimization for scalable systems.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="card bg-transparent border-primary h-100">
+            <div class="card-body text-center p-4">
+              <i class="fab fa-android text-primary mb-3" style="font-size: 3rem;"></i>
+              <h3 class="card-title">Android Development</h3>
+              <p class="card-text">Building modern, responsive Android applications with clean architecture and best practices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container-custom">
+      <h2 class="text-center fade-in">Get In Touch</h2>
+      <div class="contact-form fade-in">
+        <form>
+          <div class="row mb-3">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="subject" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container-custom">
+      <p class="mb-0">Kartik Swami</p>
+      <p class="mb-3">Software Developer</p>
+      <div class="footer-social">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p class="mt-3 mb-0">&copy; 2025 Kartik Swami. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <script>
+    // Intersection Observer for fade-in animations
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    });
+    
+    fadeElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.padding = '0.5rem 0';
+        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+      } else {
+        navbar.style.padding = '1rem 0';
+        navbar.style.boxShadow = 'none';
+      }
+    });
+    
+    // Form submission
+    const contactForm = document.querySelector('#contact form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>
